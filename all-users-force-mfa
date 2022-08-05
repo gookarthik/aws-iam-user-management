@@ -1,0 +1,29 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "BlockAccessUnlessSignedInWithMFA",
+            "Effect": "Deny",
+            "NotAction": [
+                "iam:CreateVirtualMFADevice",
+                "iam:DeactivateMFADevice",
+                "iam:DeleteVirtualMFADevice",
+                "iam:EnableMFADevice",
+                "iam:GetAccountPasswordPolicy",
+                "iam:GetAccountSummary",
+                "iam:ListMFADevices",
+                "iam:ListMFADeviceTags",
+                "iam:ListVirtualMFADevices",
+                "iam:ResyncMFADevice",
+                "iam:TagMFADevice",
+                "iam:UntagMFADevice"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "BoolIfExists": {
+                    "aws:MultiFactorAuthPresent": "false"
+                }
+            }
+        }
+    ]
+}

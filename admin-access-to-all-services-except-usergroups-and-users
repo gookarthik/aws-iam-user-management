@@ -1,0 +1,96 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAccessToAllServices",
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "DenyGroupAndUserAndAccountManagement",
+            "Effect": "Deny",
+            "Action": [
+                "iam:AddUserToGroup",
+                "iam:AttachGroupPolicy",
+                "iam:CreateGroup",
+                "iam:DeleteGroup",
+                "iam:DeleteGroupPolicy",
+                "iam:DetachGroupPolicy",
+                "iam:PutGroupPolicy",
+                "iam:RemoveUserFromGroup",
+                "iam:UpdateGroup",
+                "iam:AttachUserPolicy",
+                "iam:CreateUser",
+                "iam:DeleteUser",
+                "iam:DeleteUserPermissionsBoundary",
+                "iam:DeleteUserPolicy",
+                "iam:DetachUserPolicy",
+                "iam:PutUserPermissionsBoundary",
+                "iam:PutUserPolicy",
+                "iam:TagUser",
+                "iam:UntagUser",
+                "iam:UpdateUser",
+                "iam:CreateAccountAlias",
+                "iam:DeleteAccountAlias"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "DenyUserToManageOtherUserAccountInfo",
+            "Effect": "Deny",
+            "Action": [
+                "iam:ChangePassword",
+                "iam:CreateAccessKey",
+                "iam:DeleteAccessKey",
+                "iam:GetAccessKeyLastUsed",
+                "iam:ListAccessKeys",
+                "iam:UpdateAccessKey",
+                "iam:CreateLoginProfile",
+                "iam:DeleteLoginProfile",
+                "iam:GetLoginProfile",
+                "iam:UpdateLoginProfile",
+                "iam:DeleteSigningCertificate",
+                "iam:ListSigningCertificates",
+                "iam:UpdateSigningCertificate",
+                "iam:UploadSigningCertificate",
+                "iam:DeleteSSHPublicKey",
+                "iam:GetSSHPublicKey",
+                "iam:ListSSHPublicKeys",
+                "iam:UpdateSSHPublicKey",
+                "iam:UploadSSHPublicKey",
+                "iam:CreateServiceSpecificCredential",
+                "iam:DeleteServiceSpecificCredential",
+                "iam:ListServiceSpecificCredentials",
+                "iam:ResetServiceSpecificCredential",
+                "iam:UpdateServiceSpecificCredential"
+            ],
+            "NotResource": "arn:aws:iam::*:user/${aws:username}"
+        },
+        {
+            "Sid": "DenyUserToManageOtherUserVirtualMFADevice",
+            "Effect": "Deny",
+            "Action": [
+                "iam:CreateVirtualMFADevice",
+                "iam:DeleteVirtualMFADevice"
+            ],
+            "NotResource": "arn:aws:iam::*:mfa/${aws:username}"
+        },
+        {
+            "Sid": "DenyUserToManageOtherUserMFA",
+            "Effect": "Deny",
+            "Action": [
+                "iam:DeactivateMFADevice",
+                "iam:EnableMFADevice",
+                "iam:ListMFADeviceTags",
+                "iam:ResyncMFADevice",
+                "iam:TagMFADevice",
+                "iam:UntagMFADevice"
+            ],
+            "NotResource": [
+                "arn:aws:iam::*:mfa/${aws:username}",
+                "arn:aws:iam::*:user/${aws:username}"
+            ]
+        }
+    ]
+}
