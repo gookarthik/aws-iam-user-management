@@ -1,4 +1,4 @@
-# aws-iam-user-management
+# aws-iam-admin-user-management
 
 # What it does ?
 - This will allow users to access AWS resources only if we authenticate through MFA
